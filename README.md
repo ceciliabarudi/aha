@@ -175,9 +175,9 @@ destroyGameOverScreen();
 ### Git
 URls for the project repo and deploy
 [Link Repo](https://github.com/ceciliabarudi/aha.git)
-[Link Deploy]()
+[Link Deploy](https://ceciliabarudi.github.io/aha/)
 
 
 ### Slides
 URls for the project presentation (slides)
-[Link Slides.com](http://slides.com)
+[Link Slides.com](https://slides.com/ceciliabarudi/aha)
