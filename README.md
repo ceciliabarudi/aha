@@ -1,7 +1,6 @@
-# aha
-Module 1 game project
-
 # Aha!
+
+Module 1 project
 
 ## Description
 
