@@ -11,8 +11,8 @@ Ideas fill the completion rate. While good ideas build a Masterpiece, bad ideas 
 As the player spends more and more time brainstorming, the more shitty ideas rain down and it becomes harder and harder to avoid them.
 
 
-## MVP (DOM - CANVAS)
-*CANVAS*
+## MVP (CANVAS)
+
 The MVP is a barebones version with Game, Player and Idea constructors. Dot graphics. Player should be able to start a new game, move, accumulate ideas, trigger end of game and restart.
 
 ## Backlog
@@ -37,9 +37,7 @@ function Game() {
     this.ctx
     this.GameIsOver
     this.player
-    this.playerStartingPosition { x, y }
-    this.idea []
-    this.score
+    this.ideas []
 }
 
 Game.prototype.start(
@@ -57,7 +55,8 @@ Game.prototype.drawAll(
 )
 
 Game.prototype.clearAll(
-
+    //clear canvas
+    //filter ideas not in canvas from array
 )
 
 Game.prototype.updateAll(
@@ -84,7 +83,8 @@ function Player() {
     this.canvasElement
     this.ctx
     this.size
-    this.position { x, y }
+    this.x
+    this.y
     this.direction
     this.speed
     this.score
@@ -96,22 +96,24 @@ Player.prototype.update()
 Player.prototype.setDirection()
 Player.prototype.checkCollisionWithBorder()
 Player.prototype.checkCollisionWithIdea()
+Player.prototype.updateScore()
 Player.prototype.checkScore()
 
 ```
-### enemy.js
+### idea.js
 ```javascript
 
-function Idea() {
+function Idea(color, points) {
     this.canvasElement
     this.ctx
     this.size
-    this.position { x, y }
-    this.type: // +10 if good, -10 if shitty
+    this.x
+    this.y
+    this.points: // +10 if good, -10 if shitty
+    this.color
 }
 
 Idea.prototype.draw()
-Idea.prototype.clear()
 Idea.prototype.update()
 Idea.prototype.isInCanvas()
 
@@ -119,7 +121,7 @@ Idea.prototype.isInCanvas()
 
 
 ## States and States Transitions
-Definition of the different states and their transition (transition functions)
+Definition of the different states and their transition (transition functions) in Main.js
 ```javascript
 
 buildSplash();
@@ -140,28 +142,31 @@ destroyGameOverScreen();
 ## Task
 - Create files and deploy
 - Main - buildDOM
-- Main - buildSplash
-- Main - addEventListener
-- Main - destroySplash
+- Main - buildSplashScreen
+- Main - addEventListener for start button
+- Main - destroySplashScreen
 - Main - buildGameScreen
-- Game - buildDOM
-- Game - TimeOut test
 - Main - destroyGameScreen
 - Main - buildGameOverScreen
+- Main - addEventListener for RETHINK
 - Main - RETHINK
+- Game - buildDOM
+- Game - TimeOut test
 - Main - destroyGameOverScreen
-- Game - addEventListener
-- Game - create player
-- Player - create
-- Player - directions
 - Game - loop
-- Game - player and enemies position 
 - Game - clear
-- Game - create enemies
-- Idea - create
+- Player - create Constructor
+- Game - new Player
+- Player - eventListener for movement
+- Idea - create Constructor
+- Game - push new Idea to ideas array
+- Idea - movement
 - Idea - check if still in screen
 - Game - collision + remove
-- Game - score
+- Player - update score
+- Player - checkscore
+
+
 - Slide presentation
 
 ## Links
