@@ -15,8 +15,7 @@ body {
 
 canvas {
 	border: 1px solid black;
-	width: 50rem;
-	height: 35rem;
+	/*NEVER MODIFY WIDTH AND HEIGHT HERE OR ELSE UGLINESS WILL HAPPEN*/
 }
   
   

@@ -4,21 +4,20 @@ Module 1 project
 
 ## Description
 
-'Aha!' is a game about brainstorming ideas. The player can move in every direction to try to catch good ideas and avoiding shitty ideas. The winning condition is to have accumulated enough good ideas, while the losing condition is to accumulate many shitty ideas. 
+'Aha!' is a game about brainstorming ideas. The player moves in every direction catching good ideas and avoiding shitty ideas. The winning condition is to accumulate enough good ideas, while the losing condition is to accumulate enough shitty ideas. Ideas fill the completion rate. 
 
-Ideas fill the completion rate. While good ideas build a Masterpiece, bad ideas make the player end up brainstorming a Piece of Crap (thus losing the game).
+While good ideas build a Masterpiece, bad ideas make the player end up brainstorming a Piece of Crap (thus losing the game).
 
 As the player spends more and more time brainstorming, the more shitty ideas rain down and it becomes harder and harder to avoid them.
 
-
 ## MVP (CANVAS)
 
-The MVP is a barebones version with Game, Player and Idea constructors. Dot graphics. Player should be able to start a new game, move, accumulate ideas, trigger end of game and restart.
+The MVP is a barebones version with Game, Player and Idea constructors. Dot graphics. Player should be able to start a new game, move, accumulate ideas, trigger end of game and restart. Only one difficulty.
 
 ## Backlog
 - Ideas coming from top right corner instead of above
 - Movement through mouse instead of arrow keys
-- Time Spent Brainstorming
+- Time Spent Brainstorming makes more shitty ideas appear
 - Design
 - Images and Sprites
 - Music
@@ -91,13 +90,12 @@ function Player() {
 }
 
 Player.prototype.draw()
-Player.prototype.clear()
 Player.prototype.update()
 Player.prototype.setDirection()
 Player.prototype.checkCollisionWithBorder()
 Player.prototype.checkCollisionWithIdea()
-Player.prototype.updateScore()
 Player.prototype.checkScore()
+Player.prototype.updateScore()
 
 ```
 ### idea.js
@@ -158,6 +156,7 @@ destroyGameOverScreen();
 - Player - create Constructor
 - Game - new Player
 - Player - eventListener for movement
+- Player - checkCollisionWithBorder and make it stop
 - Idea - create Constructor
 - Game - push new Idea to ideas array
 - Idea - movement

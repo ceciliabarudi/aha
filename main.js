@@ -1,5 +1,4 @@
 'use strict';
-//debugger;
 
 function buildDOM(html) {
 	var div = document.createElement('div');
@@ -46,7 +45,7 @@ function main() {
 		gameScreen = buildDOM(`
 		<main>
 			<p class="score">0</p>
-			<canvas></canvas>
+			<canvas width="800px" height="600px"></canvas>
 		</main>
 		`);
 
@@ -59,16 +58,9 @@ function main() {
 		game = new Game(canvasElement);
 		game.start();
 		game.gameIsOverCallback(destroyGameScreen);
-		
-		/*
-		var timeoutID = setTimeout(function(){
-			destroyGameScreen();
-		}.bind(this), 3000);
-		*/
 	};
 
 	function destroyGameScreen() {
-		console.log('I AM THE DESTROYER OF WORLDS');
 		gameScreen.remove();
 		buildGameOverScreen();
 	};
