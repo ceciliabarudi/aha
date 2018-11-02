@@ -21,8 +21,9 @@ Player.prototype.draw = function() {
 };
 
 Player.prototype.update = function() {
+	this.checkCollisionWithBorder();
 	this.x += this.speed * this.directionX; 
-	this.y += this.speed * this.directionY; 
+	this.y += this.speed * this.directionY;
 };
 
 Player.prototype.setDirectionY = function(direction) {
@@ -34,7 +35,11 @@ Player.prototype.setDirectionX = function(direction) {
 };
 
 Player.prototype.checkCollisionWithBorder = function() {
-
+	if (this.x > this.canvasElement.width - this.size) {
+		this.setDirectionX(-1);
+	} else if (this.x - this.size < 0 ) {
+		this.setDirectionX(1);
+	};
 };
 Player.prototype.checkCollisionWithIdea = function() {
 

@@ -84,7 +84,8 @@ function Player() {
     this.size
     this.x
     this.y
-    this.direction
+		this.directionX
+		this.directionY
     this.speed
     this.score
 }
