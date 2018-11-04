@@ -102,15 +102,22 @@ Player.prototype.updateScore()
 ### idea.js
 ```javascript
 
-function Idea(color, points) {
+function Idea() {
     this.canvasElement
     this.ctx
     this.size
     this.x
     this.y
-    this.points: // +10 if good, -10 if shitty
-    this.color
 }
+
+Shitty instance of Idea() {
+		this.points: -30
+    this.color: 'red'
+}
+Good instance of Idea() {
+		this.points: 10
+    this.color: 'green'
+ }
 
 Idea.prototype.draw()
 Idea.prototype.update()

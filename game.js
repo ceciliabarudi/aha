@@ -52,10 +52,9 @@ Game.prototype.startLoop = function() {
 			this.ideas.push(new Shitty(this.canvasElement));
 		};
 
-		if (Math.random() > 0.998) {
+		if (Math.random() > 0.997) {
 			this.ideas.push(new Good(this.canvasElement));
 		};
-
 		this.updateAll();
 		this.clearAll();
 		this.drawAll();
@@ -80,7 +79,9 @@ Game.prototype.drawAll = function() {
 
 Game.prototype.clearAll = function() {
 	this.ctx.clearRect(0, 0, this.canvasElement.width, this.canvasElement.height);
-	//filter ideas not on canvas from array
+	this.ideas = this.ideas.filter(function(idea) {
+		return idea.isInCanvas();
+	});
 };
 
 Game.prototype.updateAll = function() {

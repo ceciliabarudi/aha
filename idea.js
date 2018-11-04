@@ -5,7 +5,7 @@ function Idea(canvasElement) {
 	this.ctx = this.canvasElement.getContext('2d');
 	this.size = 13;
 	this.x = Math.floor(Math.random() * this.canvasElement.width);
-	this.y = this.canvasElement.height - 620; // -20?
+	this.y = -20;
 }
 
 function Shitty(canvasElement, ctx, size, x, y) {
@@ -37,5 +37,5 @@ Idea.prototype.update = function() {
 };
 
 Idea.prototype.isInCanvas = function() {
-
+	return this.y < this.canvasElement.height + this.size;
 };

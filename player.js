@@ -8,7 +8,7 @@ function Player(canvasElement) {
 	this.y = 520;
 	this.directionY = 0;
 	this.directionX = 0;
-	this.speed = 4;
+	this.speed = 5;
 	this.score = 0;
 };
 
