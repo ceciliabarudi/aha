@@ -66,6 +66,8 @@ Game.prototype.checkAllCollisions(
 
 )
 
+Game.prototype.checkScore(callback)
+
 Game.prototype.finishGame(
 
 )
@@ -95,7 +97,6 @@ Player.prototype.update()
 Player.prototype.setDirection()
 Player.prototype.checkCollisionWithBorder()
 Player.prototype.checkCollisionWithIdea()
-Player.prototype.checkScore()
 Player.prototype.updateScore()
 
 ```

@@ -44,7 +44,7 @@ function main() {
 	function buildGameScreen() {
 		gameScreen = buildDOM(`
 		<main>
-			<p class="score">0</p>
+			<p>Idea: </p><p class="score">0</p>
 			<canvas width="800px" height="600px"></canvas>
 		</main>
 		`);
@@ -52,13 +52,17 @@ function main() {
 		document.body.prepend(gameScreen);
 		
 		canvasElement = document.querySelector('canvas');
-		//this shit won't work yet but i only realized after i wrote it so oh well
-		//scoreElement = document.querySelector('p.score'); won't change yet, i'm scared
+		scoreElement = document.querySelector('p.score');
 		
 		game = new Game(canvasElement);
 		game.start();
 		game.gameIsOverCallback(destroyGameScreen);
+		game.checkScore(updateScore);
 	};
+
+	function updateScore(score) {
+		scoreElement.innerText = score;
+	}
 
 	function destroyGameScreen() {
 		gameScreen.remove();

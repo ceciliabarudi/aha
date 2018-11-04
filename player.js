@@ -56,9 +56,9 @@ Player.prototype.checkCollisionWithIdea = function(idea) {
 	return collision;
 };
 
-Player.prototype.checkScore = function() {
-
-};
 Player.prototype.updateScore = function() {
-
+	if (this.checkCollisionWithIdea) {
+		return this.score;
+	}
 };
+

@@ -14,7 +14,7 @@ Game.prototype.start = function() {
 
 Game.prototype.startLoop = function() {
 	this.player = new Player(this.canvasElement);
-	this.ideas.push(new Idea(this.canvasElement));
+	this.ideas.push(new Good(this.canvasElement));
 
 	this.handleKeyDown = function(event) {
 		switch (event.key) {
@@ -43,10 +43,6 @@ Game.prototype.startLoop = function() {
 
 	document.addEventListener('keyup', this.handleKeyUp);
 
-	var timeoutID = setTimeout(function(){
-		this.gameIsOver = true;
-	}.bind(this), 20000);
-
 	var loop = function() {
 		if (Math.random() > 0.97) {
 			this.ideas.push(new Shitty(this.canvasElement));
@@ -55,6 +51,7 @@ Game.prototype.startLoop = function() {
 		if (Math.random() > 0.997) {
 			this.ideas.push(new Good(this.canvasElement));
 		};
+
 		this.updateAll();
 		this.clearAll();
 		this.drawAll();
@@ -94,11 +91,20 @@ Game.prototype.updateAll = function() {
 Game.prototype.checkAllCollisions = function() {
 	this.ideas.forEach(function(idea, index) {
 		if (this.player.checkCollisionWithIdea(idea)) {
-			console.log('bump');
+			this.player.score += idea.points;
+			this.newScore(this.player.score);
 			this.ideas.splice(index, 1);
+			
+			if (this.player.score === 100 || this.player.score === -60) {
+				this.gameIsOver = true;
+			}
 		};
 	}.bind(this));
 };
+
+Game.prototype.checkScore = function(callback) {
+	this.newScore = callback;
+}
 
 Game.prototype.gameIsOverCallback = function(callback) {
 	this.gameOverCallback = callback;
