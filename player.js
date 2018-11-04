@@ -48,9 +48,14 @@ Player.prototype.checkCollisionWithBorder = function() {
 	};
 };
 
-Player.prototype.checkCollisionWithIdea = function() {
-
+Player.prototype.checkCollisionWithIdea = function(idea) {
+	var distanceX = this.x - idea.x;
+	var distanceY = this.y - idea.y;
+	var distanceBetween = Math.sqrt(distanceX * distanceX + distanceY * distanceY);
+	var collision = distanceBetween < this.size + idea.size;
+	return collision;
 };
+
 Player.prototype.checkScore = function() {
 
 };

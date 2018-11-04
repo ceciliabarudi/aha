@@ -92,7 +92,12 @@ Game.prototype.updateAll = function() {
 };
 
 Game.prototype.checkAllCollisions = function() {
-
+	this.ideas.forEach(function(idea, index) {
+		if (this.player.checkCollisionWithIdea(idea)) {
+			console.log('bump');
+			this.ideas.splice(index, 1);
+		};
+	}.bind(this));
 };
 
 Game.prototype.gameIsOverCallback = function(callback) {
