@@ -37,6 +37,7 @@ Player.prototype.setDirectionX = function(direction) {
 Player.prototype.checkCollisionWithBorder = function() {
 	if (this.x > this.canvasElement.width - this.size) {
 		this.setDirectionX(-1);
+		Game.prototype.handleKeyUp;
 	} else if (this.x - this.size < 0 ) {
 		this.setDirectionX(1);
 	};
