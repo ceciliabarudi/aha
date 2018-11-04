@@ -14,8 +14,8 @@ Game.prototype.start = function() {
 
 Game.prototype.startLoop = function() {
 	this.player = new Player(this.canvasElement);
-	//this.ideas.push = (new Idea(this.canvasElement));
-	
+	this.ideas.push(new Idea(this.canvasElement));
+
 	this.handleKeyDown = function(event) {
 		switch (event.key) {
 			case 'ArrowUp':
@@ -48,6 +48,14 @@ Game.prototype.startLoop = function() {
 	}.bind(this), 20000);
 
 	var loop = function() {
+		if (Math.random() > 0.97) {
+			this.ideas.push(new Shitty(this.canvasElement));
+		};
+
+		if (Math.random() > 0.998) {
+			this.ideas.push(new Good(this.canvasElement));
+		};
+
 		this.updateAll();
 		this.clearAll();
 		this.drawAll();
@@ -65,7 +73,9 @@ Game.prototype.startLoop = function() {
 
 Game.prototype.drawAll = function() {
 	this.player.draw();
-	//draw ideas from array with forEach
+	this.ideas.forEach(function(idea) {
+    idea.draw();
+  });
 };
 
 Game.prototype.clearAll = function() {
@@ -75,7 +85,9 @@ Game.prototype.clearAll = function() {
 
 Game.prototype.updateAll = function() {
 	this.player.update();
-	//update ideas in array
+	this.ideas.forEach(function(idea) {
+		idea.update();
+	});
 };
 
 Game.prototype.checkAllCollisions = function() {
