@@ -35,13 +35,18 @@ Player.prototype.setDirectionX = function(direction) {
 };
 
 Player.prototype.checkCollisionWithBorder = function() {
-	if (this.x > this.canvasElement.width - this.size) {
-		this.setDirectionX(-1);
-		Game.prototype.handleKeyUp;
-	} else if (this.x - this.size < 0 ) {
-		this.setDirectionX(1);
+	// conditions that player is at border and also going a certain direction
+	if (this.x >= this.canvasElement.width - this.size && this.directionX === 1 ) {
+		this.setDirectionX(0);
+	} else if (this.x - this.size <= 0 && this.directionX === -1 ) {
+		this.setDirectionX(0);
+	} else if (this.y >= this.canvasElement.height - this.size && this.directionY === 1) {
+		this.setDirectionY(0);
+	} else if (this.y - this.size <= 0 && this.directionY === -1 ) {
+		this.setDirectionY(0);
 	};
 };
+
 Player.prototype.checkCollisionWithIdea = function() {
 
 };
