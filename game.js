@@ -43,6 +43,14 @@ Game.prototype.startLoop = function() {
 
 	document.addEventListener('keyup', this.handleKeyUp);
 
+	var intervalId = setInterval(function() {
+		if(!this.gameIsOver) {
+			++this.timeSpentBrainstorming;
+		} else {
+			clearInterval(intervalId);
+		};
+	}.bind(this), 1000);
+
 	var loop = function() {
 		if (Math.random() > 0.977) {
 			this.ideas.push(new Shitty(this.canvasElement));
@@ -68,16 +76,17 @@ Game.prototype.startLoop = function() {
 	loop();
 }
 
+
+Game.prototype.updateTimerCallback = function(callback) {
+	this.newTime = callback;
+};
+
 Game.prototype.updateBrainstormingTime = function() {
-	var intervalId = setInterval(function() {
-		//references to the timerElement in main?
-		if(!this.gameIsOver) {
-			console.log('brainstorming');
-			++this.timeSpentBrainstorming;
-		} else {
-			clearInterval(intervalId);
-		};
-	}.bind(this), 1000);
+	var minutes = Math.floor(this.timeSpentBrainstorming / 60);
+	var seconds = this.timeSpentBrainstorming % 60;
+	if (this.newTime) {
+		this.newTime(minutes, seconds);
+	};
 };
 
 Game.prototype.drawAll = function() {

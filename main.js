@@ -15,6 +15,7 @@ function main() {
 
 	var brainstormButton;
 	var rethinkButton;
+	var backToSplashButton;
 	var scoreElement;
 	var timerElementMinute;
 	var timerElementSecond;
@@ -27,6 +28,11 @@ function main() {
 			<main>
 				<h1>Aha!</h1>
 				<h2>A Brainstorming Game</h2>
+				<div class="wrapper">
+					<h3>Instructions:</h3>
+					<p>Use the arrow keys to move and catch ideas</p>
+					<p>Avoid the shitty ones!</p>
+				</div>
 				<button>brainstorm!</button>
 			</main>
 		`);
@@ -68,6 +74,7 @@ function main() {
 		game.start();
 		game.gameIsOverCallback(destroyGameScreen);
 		game.checkScore(updateScore);
+		game.updateTimerCallback(updateTimer);
 	};
 
 	function updateScore(score) {
@@ -80,7 +87,10 @@ function main() {
 	}
 
 	function destroyGameScreen() {
-		gameScreen.remove();
+		if (gameScreen) {
+			gameScreen.remove();
+		};
+	
 		if (game.player.score < 0 ) {
 			buildLostGameScreen();
 		} else {
@@ -101,6 +111,7 @@ function main() {
 				</p>
 				<h2>and came up with a Piece of Crap.</h2>
 				<button>rethink!</button>
+				<button class="go-to-splash">back to start</button>
 			</main>
 		`);
 
@@ -108,6 +119,10 @@ function main() {
 
 		timerElementMinute = document.querySelector('span.minutes');
 		timerElementSecond = document.querySelector('span.seconds');
+		//game.updateTimerCallback(updateTimer);
+		//this doesn't work because after game ends, timer values are reset
+		//how do I end the game but keep the values stored somewhere?
+
 		rethinkButton = document.querySelector('button');
 		rethinkButton.addEventListener('click', destroyLostGameScreen);
 	};
@@ -129,9 +144,10 @@ function main() {
 					<span class="seconds">00</span>
 					seconds,
 				</p>
-				<h2>and came up with a Masterpiece.</h2>
+				<h2>and came up with a Masterpiece, you smart butt!</h2>
+				<h3>Who you gonna sell it to?</h3>
 				<button>Brainstorm a new one!</button>
-				<h3>You smart butt. Who you gonna sell it to?</h3>
+				<button class="go-to-splash">back to start</button>
 			</main>
 		`);
 
@@ -139,6 +155,10 @@ function main() {
 
 		timerElementMinute = document.querySelector('span.minutes');
 		timerElementSecond = document.querySelector('span.seconds');
+		//game.updateTimerCallback(updateTimer);
+		//this doesn't work because after game ends, timer values are reset
+		//how do I end the game but keep the values stored somewhere?
+
 		rethinkButton = document.querySelector('button');
 		rethinkButton.addEventListener('click', destroyWonGameScreen);
 	};
