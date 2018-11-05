@@ -11,7 +11,8 @@ function main() {
 	//declare variables for states and interface elements
 	var splashScreen;
 	var gameScreen;
-	var gameOverScreen;
+	var lostGameScreen;
+	var wonGameScreen;
 
 	var brainstormButton;
 	var rethinkButton;
@@ -66,11 +67,15 @@ function main() {
 
 	function destroyGameScreen() {
 		gameScreen.remove();
-		buildGameOverScreen();
+		if (game.player.score < 0 ) {
+			buildLostGameScreen();
+		} else {
+			buildWonGameScreen();
+		};
 	};
 
-	function buildGameOverScreen() {
-		gameOverScreen = buildDOM(`
+	function buildLostGameScreen() {
+		lostGameScreen = buildDOM(`
 			<main>
 				<h1>Done!</h1>
 				<h2>You came up with a Piece of Crap.</h2>
@@ -78,15 +83,37 @@ function main() {
 			</main>
 		`);
 
-		document.body.prepend(gameOverScreen);
+		document.body.prepend(lostGameScreen);
 
 		rethinkButton = document.querySelector('button');
-		rethinkButton.addEventListener('click', destroyGameOverScreen);
+		rethinkButton.addEventListener('click', destroyLostGameScreen);
 	};
 
-	function destroyGameOverScreen() {
-		gameOverScreen.remove();
-		rethinkButton.removeEventListener('click', destroyGameOverScreen);
+	function destroyLostGameScreen() {
+		lostGameScreen.remove();
+		rethinkButton.removeEventListener('click', destroyLostGameScreen);
+		buildGameScreen();
+	};
+
+	function buildWonGameScreen() {
+		wonGameScreen = buildDOM(`
+			<main>
+				<h1>Done!</h1>
+				<h2>You came up with a Masterpiece.</h2>
+				<button>Brainstorm a new one!</button>
+				<h3>You smart butt. Who you gonna sell it to?</h3>
+			</main>
+		`);
+
+		document.body.prepend(wonGameScreen);
+
+		rethinkButton = document.querySelector('button');
+		rethinkButton.addEventListener('click', destroyWonGameScreen);
+	};
+
+	function destroyWonGameScreen() {
+		wonGameScreen.remove();
+		rethinkButton.removeEventListener('click', destroyWonGameScreen);
 		buildGameScreen();
 	};
 
