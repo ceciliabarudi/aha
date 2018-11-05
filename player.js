@@ -56,9 +56,9 @@ Player.prototype.checkCollisionWithIdea = function(idea) {
 	return collision;
 };
 
-Player.prototype.updateScore = function() {
+Player.prototype.returnScoreOnCollision = function() {
+	//sends this info to checkAllCollisions in game.js
 	if (this.checkCollisionWithIdea) {
 		return this.score;
 	}
 };
-

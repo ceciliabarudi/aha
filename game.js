@@ -14,7 +14,6 @@ Game.prototype.start = function() {
 
 Game.prototype.startLoop = function() {
 	this.player = new Player(this.canvasElement);
-	this.ideas.push(new Good(this.canvasElement));
 
 	this.handleKeyDown = function(event) {
 		switch (event.key) {
@@ -95,7 +94,7 @@ Game.prototype.checkAllCollisions = function() {
 			this.newScore(this.player.score);
 			this.ideas.splice(index, 1);
 			
-			if (this.player.score === 100 || this.player.score === -60) {
+			if (this.player.score >= 100 || this.player.score <= -60) {
 				this.gameIsOver = true;
 			}
 		};
