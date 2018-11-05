@@ -4,6 +4,7 @@ function Game(canvasElement) {
 	this.canvasElement = canvasElement;
 	this.ctx = this.canvasElement.getContext('2d');
 	this.gameIsOver = false;
+	this.timeSpentBrainstorming = 0;
 	this.player = null;
 	this.ideas = [];
 };
@@ -43,11 +44,11 @@ Game.prototype.startLoop = function() {
 	document.addEventListener('keyup', this.handleKeyUp);
 
 	var loop = function() {
-		if (Math.random() > 0.97) {
+		if (Math.random() > 0.977) {
 			this.ideas.push(new Shitty(this.canvasElement));
 		};
 
-		if (Math.random() > 0.997) {
+		if (Math.random() > 0.992) {
 			this.ideas.push(new Good(this.canvasElement));
 		};
 
@@ -55,6 +56,7 @@ Game.prototype.startLoop = function() {
 		this.clearAll();
 		this.drawAll();
 		this.checkAllCollisions();
+		this.updateBrainstormingTime();
 
 		if (!this.gameIsOver) {
 			requestAnimationFrame(loop);
@@ -65,6 +67,18 @@ Game.prototype.startLoop = function() {
 
 	loop();
 }
+
+Game.prototype.updateBrainstormingTime = function() {
+	var intervalId = setInterval(function() {
+		//references to the timerElement in main?
+		if(!this.gameIsOver) {
+			console.log('brainstorming');
+			++this.timeSpentBrainstorming;
+		} else {
+			clearInterval(intervalId);
+		};
+	}.bind(this), 1000);
+};
 
 Game.prototype.drawAll = function() {
 	this.player.draw();

@@ -8,7 +8,6 @@ function buildDOM(html) {
 
 function main() {
 
-	//declare variables for states and interface elements
 	var splashScreen;
 	var gameScreen;
 	var lostGameScreen;
@@ -17,6 +16,8 @@ function main() {
 	var brainstormButton;
 	var rethinkButton;
 	var scoreElement;
+	var timerElementMinute;
+	var timerElementSecond;
 	var canvasElement;
 	var game;
 
@@ -46,6 +47,12 @@ function main() {
 		gameScreen = buildDOM(`
 		<main>
 			<p>Idea: </p><p class="score">0</p>
+			<p class="timer">
+				Time spent brainstorming:
+				<span class="minutes">00</span>
+				<span>:</span>
+				<span class="seconds">00</span>
+			</p>
 			<canvas width="800px" height="600px"></canvas>
 		</main>
 		`);
@@ -54,6 +61,8 @@ function main() {
 		
 		canvasElement = document.querySelector('canvas');
 		scoreElement = document.querySelector('p.score');
+		timerElementMinute = document.querySelector('span.minutes');
+		timerElementSecond = document.querySelector('span.seconds');
 		
 		game = new Game(canvasElement);
 		game.start();
@@ -63,6 +72,11 @@ function main() {
 
 	function updateScore(score) {
 		scoreElement.innerText = score;
+	}
+
+	function updateTimer(minutes, seconds) {
+		timerElementMinute.innerText = minutes;
+		timerElementSecond.innerText = seconds;
 	}
 
 	function destroyGameScreen() {
@@ -78,13 +92,22 @@ function main() {
 		lostGameScreen = buildDOM(`
 			<main>
 				<h1>Done!</h1>
-				<h2>You came up with a Piece of Crap.</h2>
+				<p class="timer">
+					You brainstormed for
+					<span class="minutes">00</span>
+					<span>minutes and</span>
+					<span class="seconds">00</span>
+					seconds,
+				</p>
+				<h2>and came up with a Piece of Crap.</h2>
 				<button>rethink!</button>
 			</main>
 		`);
 
 		document.body.prepend(lostGameScreen);
 
+		timerElementMinute = document.querySelector('span.minutes');
+		timerElementSecond = document.querySelector('span.seconds');
 		rethinkButton = document.querySelector('button');
 		rethinkButton.addEventListener('click', destroyLostGameScreen);
 	};
@@ -99,7 +122,14 @@ function main() {
 		wonGameScreen = buildDOM(`
 			<main>
 				<h1>Done!</h1>
-				<h2>You came up with a Masterpiece.</h2>
+				<p class="timer">
+					You brainstormed for
+					<span class="minutes">00</span>
+					<span>minutes and</span>
+					<span class="seconds">00</span>
+					seconds,
+				</p>
+				<h2>and came up with a Masterpiece.</h2>
 				<button>Brainstorm a new one!</button>
 				<h3>You smart butt. Who you gonna sell it to?</h3>
 			</main>
@@ -107,6 +137,8 @@ function main() {
 
 		document.body.prepend(wonGameScreen);
 
+		timerElementMinute = document.querySelector('span.minutes');
+		timerElementSecond = document.querySelector('span.seconds');
 		rethinkButton = document.querySelector('button');
 		rethinkButton.addEventListener('click', destroyWonGameScreen);
 	};

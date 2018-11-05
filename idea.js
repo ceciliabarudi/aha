@@ -33,7 +33,7 @@ Idea.prototype.draw = function() {
 };
 
 Idea.prototype.update = function() {
-	this.y += Math.floor(Math.random() * 4) + 2;
+	this.y += Math.floor(Math.random() * 3) + 1;
 };
 
 Idea.prototype.isInCanvas = function() {
