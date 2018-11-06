@@ -7,8 +7,12 @@ function Game(canvasElement) {
 	this.timeSpentBrainstorming = 0;
 	this.minutes;
 	this.seconds;
+	this.difficulty = 1;
+	this.intervalIdDifficulty = 0;
 	this.player = null;
 	this.ideas = [];
+	this.shittyIdeaRate;
+	this.goodIdeaRate;
 };
 
 Game.prototype.start = function() {
@@ -53,19 +57,25 @@ Game.prototype.startLoop = function() {
 		};
 	}.bind(this), 1000);
 
+	function upDifficulty() {
+		this.difficulty++;
+	};
+
+	this.intervalIdDifficulty = setInterval(upDifficulty.bind(this), 10000);
+
 	var loop = function() {
-		if (Math.random() > 0.977) {
+		if (Math.random() > this.shittyIdeaRate) {
 			this.ideas.push(new Shitty(this.canvasElement));
 		};
 
-		if (Math.random() > 0.992/*TEST 0.90*/) {
+		if (Math.random() > this.goodIdeaRate) {
 			this.ideas.push(new Good(this.canvasElement));
 		};
-		
 
 		this.updateAll();
 		this.clearAll();
 		this.drawAll();
+		this.checkDifficulty();
 		this.checkAllCollisions();
 		this.updateBrainstormingTime();
 
@@ -78,6 +88,80 @@ Game.prototype.startLoop = function() {
 
 	loop();
 }
+
+Game.prototype.checkDifficulty = function() {
+
+	switch (this.difficulty) {
+		case 0: //only for tests
+			this.shittyIdeaRate = 0.98;
+			this.goodIdeaRate = 0.90;
+			this.ideas.forEach(function(idea) {
+				idea.setSpeed(1.5, 0.7);
+			});
+			break;
+		case 1:
+			this.shittyIdeaRate = 0.975;
+			this.goodIdeaRate = 0.98;
+			break;
+		case 2:
+			this.shittyIdeaRate = 0.97;
+			this.goodIdeaRate = 0.985;
+			this.ideas.forEach(function(idea) {
+				idea.setSpeed(4, 2);
+			});
+			break;
+		case 3:
+			this.shittyIdeaRate = 0.965;
+			this.goodIdeaRate = 0.987; 
+			this.ideas.forEach(function(idea) {
+				idea.setSpeed(5, 3);
+			});
+			break;
+		case 4:
+			this.shittyIdeaRate = 0.96;
+			this.goodIdeaRate = 0.99;
+			this.ideas.forEach(function(idea) {
+				idea.setSpeed(6, 4.5);
+			});
+			break;
+		case 5:
+			this.shittyIdeaRate = 0.95;
+			this.goodIdeaRate = 0.992;
+			this.ideas.forEach(function(idea) {
+				idea.setSpeed(7, 6);
+			});
+			break;
+		case 6:
+			this.shittyIdeaRate = 0.95;
+			this.goodIdeaRate = 0.992;
+			this.ideas.forEach(function(idea) {
+				idea.setSpeed(9, 7.5);
+			});
+			break;
+		case 7:
+			this.shittyIdeaRate = 0.95;
+			this.goodIdeaRate = 0.992;
+			this.ideas.forEach(function(idea) {
+				idea.setSpeed(11, 10);
+			});
+			break;
+		case 8:
+			this.shittyIdeaRate = 0.95;
+			this.goodIdeaRate = 0.992;
+			this.ideas.forEach(function(idea) {
+				idea.setSpeed(13, 12);
+			});
+			break;
+		default:
+			this.shittyIdeaRate = 0.92;
+			this.goodIdeaRate = 0.997;
+			this.ideas.forEach(function(idea) {
+				idea.setSpeed(15, 13);
+			});
+			break;
+	}
+
+};
 
 
 Game.prototype.updateTimerCallback = function(callback) {

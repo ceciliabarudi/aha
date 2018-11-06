@@ -78,8 +78,9 @@ function main() {
 		game.updateTimerCallback(updateTimer);
 	};
 
-	function gameOverTransition(score, minutes, seconds) {
+	function gameOverTransition(score, minutes, seconds, intervalIdDifficulty) {
 		destroyGameScreen();
+		clearInterval(intervalIdDifficulty);
 		if (game.player.score < 0 ) {
 			buildLostGameScreen(score, minutes, seconds);
 		} else {
@@ -155,7 +156,7 @@ function main() {
 				</p>
 				<h2>and came up with a Masterpiece, you smart butt!</h2>
 				<h3>Who you gonna sell it to?</h3>
-				<button>Brainstorm a new one!</button>
+				<button>brainstorm a new one!</button>
 				<button class="go-to-splash">back to start</button>
 			</main>
 		`);

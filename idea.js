@@ -6,6 +6,8 @@ function Idea(canvasElement) {
 	this.size = 13;
 	this.x = Math.floor(Math.random() * this.canvasElement.width);
 	this.y = -20;
+	this.fastestSpeed = 3;
+	this.slowestSpeed = 1;
 }
 
 function Shitty(canvasElement, ctx, size, x, y) {
@@ -32,8 +34,13 @@ Idea.prototype.draw = function() {
 	this.ctx.closePath();
 };
 
+Idea.prototype.setSpeed = function(fastest, slowest) {
+	this.fastestSpeed = fastest;
+	this.slowestSpeed = slowest;
+}
+
 Idea.prototype.update = function() {
-	this.y += Math.floor(Math.random() * 3) + 1;
+	this.y += Math.floor(Math.random() * this.fastestSpeed) + this.slowestSpeed;
 };
 
 Idea.prototype.isInCanvas = function() {

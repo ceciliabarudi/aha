@@ -39,8 +39,12 @@ function Game() {
 		this.timeSpentBrainstorming
 		this.minutes
 		this.seconds
+		this.difficulty
+		this.intervalIdDifficulty
     this.player
-    this.ideas []
+		this.ideas []
+		this.shittyIdeaRate
+		this.goodIdeaRate
 }
 
 Game.prototype.start(
@@ -51,8 +55,11 @@ Game.prototype.start(
 Game.prototype.startLoop = function() {
 		this.handleKeyDown
 		this.handleKeyUp
+		intervalIdDifficulty
     loop
 }
+
+Game.prototype.checkDifficulty()
 
 Game.prototype.updateTimerCallback()
 
@@ -118,7 +125,9 @@ function Idea() {
     this.ctx
     this.size
     this.x
-    this.y
+		this.y
+		this.fastestSpeed
+		this.slowestSpeed
 }
 
 Shitty instance of Idea() {
@@ -132,6 +141,7 @@ Good instance of Idea() {
  }
 
 Idea.prototype.draw()
+Idea.prototype.setSpeed()
 Idea.prototype.update()
 Idea.prototype.isInCanvas()
 
