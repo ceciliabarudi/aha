@@ -35,7 +35,10 @@ The MVP is a barebones version with Game, Player and Idea constructors. Dot grap
 function Game() {
     this.canvasElement
     this.ctx
-    this.GameIsOver
+		this.GameIsOver
+		this.timeSpentBrainstorming
+		this.minutes
+		this.seconds
     this.player
     this.ideas []
 }
@@ -50,6 +53,10 @@ Game.prototype.startLoop = function() {
 		this.handleKeyUp
     loop
 }
+
+Game.prototype.updateTimerCallback()
+
+Game.prototype.updateBrainstormingTime()
 
 Game.prototype.drawAll(
 
@@ -145,13 +152,21 @@ destroySplash();
 
 buildGameScreen();
 
+gameOverTransition(stores game values to pass them when Game Over);
+
 updateScore();
+
+updateTimer();
 
 destroyGameScreen();
 
-buildGameOverScreen();
+buildLostGameScreen(game values);
 
-destroyGameOverScreen();
+destroyLostGameScreen();
+
+buildWonGameScreen(game values);
+
+destroyWonGameScreen();
 
 
 ```

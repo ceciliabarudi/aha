@@ -12,7 +12,6 @@ function main() {
 	var gameScreen;
 	var lostGameScreen;
 	var wonGameScreen;
-
 	var brainstormButton;
 	var rethinkButton;
 	var backToSplashButton;
@@ -72,10 +71,21 @@ function main() {
 		
 		game = new Game(canvasElement);
 		game.start();
-		game.gameIsOverCallback(destroyGameScreen);
+		game.gameIsOverCallback(function() {
+			gameOverTransition(game.player.score, game.minutes, game.seconds)
+		});
 		game.checkScore(updateScore);
 		game.updateTimerCallback(updateTimer);
 	};
+
+	function gameOverTransition(score, minutes, seconds) {
+		destroyGameScreen();
+		if (game.player.score < 0 ) {
+			buildLostGameScreen(score, minutes, seconds);
+		} else {
+			buildWonGameScreen(score, minutes, seconds);
+		};
+	}
 
 	function updateScore(score) {
 		scoreElement.innerText = score;
@@ -90,15 +100,9 @@ function main() {
 		if (gameScreen) {
 			gameScreen.remove();
 		};
-	
-		if (game.player.score < 0 ) {
-			buildLostGameScreen();
-		} else {
-			buildWonGameScreen();
-		};
 	};
 
-	function buildLostGameScreen() {
+	function buildLostGameScreen(score, minutes, seconds) {
 		lostGameScreen = buildDOM(`
 			<main>
 				<h1>Done!</h1>
@@ -110,6 +114,7 @@ function main() {
 					seconds,
 				</p>
 				<h2>and came up with a Piece of Crap.</h2>
+				<!-- <p>Score: </p><p class="score">0</p> -->
 				<button>rethink!</button>
 				<button class="go-to-splash">back to start</button>
 			</main>
@@ -117,11 +122,14 @@ function main() {
 
 		document.body.prepend(lostGameScreen);
 
+		// --------------------------------------------------------//
 		timerElementMinute = document.querySelector('span.minutes');
 		timerElementSecond = document.querySelector('span.seconds');
-		//game.updateTimerCallback(updateTimer);
-		//this doesn't work because after game ends, timer values are reset
-		//how do I end the game but keep the values stored somewhere?
+		timerElementMinute.innerText = minutes;
+		timerElementSecond.innerText = seconds;
+		//scoreElement = document.querySelector('p.score');
+		//scoreElement.innerText = score;
+		// --------------------------------------------------------//
 
 		rethinkButton = document.querySelector('button');
 		rethinkButton.addEventListener('click', destroyLostGameScreen);
@@ -133,10 +141,11 @@ function main() {
 		buildGameScreen();
 	};
 
-	function buildWonGameScreen() {
+	function buildWonGameScreen(score, minutes, seconds) {
 		wonGameScreen = buildDOM(`
 			<main>
 				<h1>Done!</h1>
+				<!-- <p>Score: </p><p class="score">0</p> -->
 				<p class="timer">
 					You brainstormed for
 					<span class="minutes">00</span>
@@ -153,11 +162,14 @@ function main() {
 
 		document.body.prepend(wonGameScreen);
 
+		// --------------------------------------------------------//
 		timerElementMinute = document.querySelector('span.minutes');
 		timerElementSecond = document.querySelector('span.seconds');
-		//game.updateTimerCallback(updateTimer);
-		//this doesn't work because after game ends, timer values are reset
-		//how do I end the game but keep the values stored somewhere?
+		timerElementMinute.innerText = minutes;
+		timerElementSecond.innerText = seconds;
+		//scoreElement = document.querySelector('p.score');
+		//scoreElement.innerText = score;
+		// --------------------------------------------------------//
 
 		rethinkButton = document.querySelector('button');
 		rethinkButton.addEventListener('click', destroyWonGameScreen);

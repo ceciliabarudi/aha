@@ -35,8 +35,8 @@ Player.prototype.setDirectionX = function(direction) {
 };
 
 Player.prototype.checkCollisionWithBorder = function() {
-	// conditions that player is at border and also going a certain direction
-	// avoid it from bouncing and getting stuck
+	// conditions that player is at border and also going a certain
+	// direction avoid it from bouncing and getting stuck
 	if (this.x >= this.canvasElement.width - this.size && this.directionX === 1 ) {
 		this.setDirectionX(0);
 	} else if (this.x - this.size <= 0 && this.directionX === -1 ) {

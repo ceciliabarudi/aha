@@ -5,6 +5,8 @@ function Game(canvasElement) {
 	this.ctx = this.canvasElement.getContext('2d');
 	this.gameIsOver = false;
 	this.timeSpentBrainstorming = 0;
+	this.minutes;
+	this.seconds;
 	this.player = null;
 	this.ideas = [];
 };
@@ -56,9 +58,10 @@ Game.prototype.startLoop = function() {
 			this.ideas.push(new Shitty(this.canvasElement));
 		};
 
-		if (Math.random() > 0.992) {
+		if (Math.random() > 0.992/*TEST 0.90*/) {
 			this.ideas.push(new Good(this.canvasElement));
 		};
+		
 
 		this.updateAll();
 		this.clearAll();
@@ -82,10 +85,10 @@ Game.prototype.updateTimerCallback = function(callback) {
 };
 
 Game.prototype.updateBrainstormingTime = function() {
-	var minutes = Math.floor(this.timeSpentBrainstorming / 60);
-	var seconds = this.timeSpentBrainstorming % 60;
+	this.minutes = Math.floor(this.timeSpentBrainstorming / 60);
+	this.seconds = this.timeSpentBrainstorming % 60;
 	if (this.newTime) {
-		this.newTime(minutes, seconds);
+		this.newTime(this.minutes, this.seconds);
 	};
 };
 
