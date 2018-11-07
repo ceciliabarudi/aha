@@ -32,7 +32,7 @@ function main() {
 				<h2>A Brainstorming Game</h2>
 				<div class="wrapper">
 					<h3>Instructions:</h3>
-					<p>Use the arrow keys to move and catch ideas</p>
+					<p>Use the mouse to move and catch ideas</p>
 					<p>Avoid the shitty ones!</p>
 				</div>
 				<button>brainstorm!</button>

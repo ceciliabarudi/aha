@@ -18,13 +18,13 @@ The MVP is a barebones version with Game, Player and Idea constructors. Dot grap
 - Clean and comment code
 - Add different Win and Lose screens
 - Time Spent Brainstorming makes more shitty ideas appear
-- Ideas coming from top right corner instead of above
-- Design
-- Images and Sprites
-- Music
 - Add going back to splash to check instructions or if new player
+- Ideas coming from top right corner instead of above
 - Movement through mouse instead of arrow keys
-- Add username
+- Images and Sprites
+- Design
+- Music
+- Add username and highscores
 - Mobile version
 
 
@@ -48,18 +48,18 @@ function Game() {
 }
 
 Game.prototype.start(
-    buildDOM()
     this.startLoop()
 )
 
 Game.prototype.startLoop = function() {
-		this.handleKeyDown
-		this.handleKeyUp
+		this.handleMouseMove
+		//this.handleKeyDown
+		//this.handleKeyUp
 		intervalIdDifficulty
     loop
 }
 
-Game.prototype.checkDifficulty()
+Game.prototype.checkDifficulty(switch)
 
 Game.prototype.updateTimerCallback()
 

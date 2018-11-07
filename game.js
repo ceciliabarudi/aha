@@ -17,37 +17,52 @@ function Game(canvasElement) {
 
 Game.prototype.start = function() {
 	this.startLoop();
-}
+};
 
 Game.prototype.startLoop = function() {
 	this.player = new Player(this.canvasElement);
 
-	this.handleKeyDown = function(event) {
-		switch (event.key) {
-			case 'ArrowUp':
-				this.player.setDirectionY(-1)
-				break;
-			case 'ArrowDown':
-				this.player.setDirectionY(1)
-				break;
-			case 'ArrowLeft':
-				this.player.setDirectionX(-1)
-				break;
-			case 'ArrowRight':
-				this.player.setDirectionX(1)
-				break;
-		}
-
+	this.handleMouseMove = function(event) {
+		var relativeX = event.clientX - this.canvasElement.offsetLeft;
+		var relativeY = event.clientY - this.canvasElement.offsetTop;
+    if (relativeX > 0 && relativeX < this.canvasElement.width) {
+        this.player.x = relativeX - this.player.size/2;
+		};
+		if (relativeY > 0 && relativeY < this.canvasElement.height) {
+			this.player.y = relativeY - this.player.size/2;
+	};
 	}.bind(this);
 
-	document.addEventListener('keydown', this.handleKeyDown);
+	document.addEventListener('mousemove', this.handleMouseMove, false);
 
-	this.handleKeyUp = function(event) {
-		this.player.setDirectionY(0)
-		this.player.setDirectionX(0)
-	}.bind(this);
+	// Code for movement using arrows ---------------------------------
+	// this.handleKeyDown = function(event) {
+	// 	switch (event.key) {
+	// 		case 'ArrowUp':
+	// 			this.player.setDirectionY(-1)
+	// 			break;
+	// 		case 'ArrowDown':
+	// 			this.player.setDirectionY(1)
+	// 			break;
+	// 		case 'ArrowLeft':
+	// 			this.player.setDirectionX(-1)
+	// 			break;
+	// 		case 'ArrowRight':
+	// 			this.player.setDirectionX(1)
+	// 			break;
+	// 	}
+	// }.bind(this);
 
-	document.addEventListener('keyup', this.handleKeyUp);
+	// document.addEventListener('keydown', this.handleKeyDown);
+
+	// this.handleKeyUp = function(event) {
+	// 	this.player.setDirectionY(0)
+	// 	this.player.setDirectionX(0)
+	// }.bind(this);
+
+	// document.addEventListener('keyup', this.handleKeyUp);
+
+	// ----------------------------------------------------------------
 
 	var intervalId = setInterval(function() {
 		if(!this.gameIsOver) {
@@ -93,75 +108,74 @@ Game.prototype.checkDifficulty = function() {
 
 	switch (this.difficulty) {
 		case 0: //only for tests
-			this.shittyIdeaRate = 0.9;
-			this.goodIdeaRate = 0.8;
+			this.shittyIdeaRate = 0.8;
+			this.goodIdeaRate = 0.7;
 			this.ideas.forEach(function(idea) {
 				idea.setSpeed(1.5, 1.3);
 			});
 			break;
 		case 1:
-			this.shittyIdeaRate = 0.955;
-			this.goodIdeaRate = 0.96;
+			this.shittyIdeaRate = 0.855;
+			this.goodIdeaRate = 0.98;
 			break;
 		case 2:
-			this.shittyIdeaRate = 0.952;
-			this.goodIdeaRate = 0.957;
+			this.shittyIdeaRate = 0.852;
+			this.goodIdeaRate = 0.982;
 			this.ideas.forEach(function(idea) {
-				idea.setSpeed(3, 2.8);
+				idea.setSpeed(3, 2.9);
 			});
 			break;
 		case 3:
-			this.shittyIdeaRate = 0.95;
-			this.goodIdeaRate = 0.953; 
+			this.shittyIdeaRate = 0.85;
+			this.goodIdeaRate = 0.984; 
 			this.ideas.forEach(function(idea) {
-				idea.setSpeed(4, 3.8);
+				idea.setSpeed(4, 3.9);
 			});
 			break;
 		case 4:
-			this.shittyIdeaRate = 0.93;
-			this.goodIdeaRate = 0.951;
+			this.shittyIdeaRate = 0.83;
+			this.goodIdeaRate = 0.986;
 			this.ideas.forEach(function(idea) {
-				idea.setSpeed(5, 4.8);
+				idea.setSpeed(5, 4.9);
 			});
 			break;
 		case 5:
-			this.shittyIdeaRate = 0.92;
-			this.goodIdeaRate = 0.949;
+			this.shittyIdeaRate = 0.82;
+			this.goodIdeaRate = 0.988;
 			this.ideas.forEach(function(idea) {
-				idea.setSpeed(6, 5.7);
+				idea.setSpeed(6, 5.9);
 			});
 			break;
 		case 6:
-			this.shittyIdeaRate = 0.91;
-			this.goodIdeaRate = 0.945;
+			this.shittyIdeaRate = 0.81;
+			this.goodIdeaRate = 0.99;
 			this.ideas.forEach(function(idea) {
-				idea.setSpeed(7, 6.7);
+				idea.setSpeed(7, 6.8);
 			});
 			break;
 		case 7:
-			this.shittyIdeaRate = 0.91;
-			this.goodIdeaRate = 0.945;
+			this.shittyIdeaRate = 0.81;
+			this.goodIdeaRate = 0.99;
 			this.ideas.forEach(function(idea) {
 				idea.setSpeed(9.5, 9.2);
 			});
 			break;
 		case 8:
-			this.shittyIdeaRate = 0.91;
-			this.goodIdeaRate = 0.945;
+			this.shittyIdeaRate = 0.81;
+			this.goodIdeaRate = 0.99;
 			this.ideas.forEach(function(idea) {
 				idea.setSpeed(10.2, 9.8);
 			});
 			break;
 		default:
-			this.shittyIdeaRate = 0.9;
-			this.goodIdeaRate = 0.94;
+			this.shittyIdeaRate = 0.8;
+			this.goodIdeaRate = 0.995;
 			this.ideas.forEach(function(idea) {
 				idea.setSpeed(13, 12.5);
 			});
 			break;
 	};
 };
-
 
 Game.prototype.updateTimerCallback = function(callback) {
 	this.newTime = callback;
