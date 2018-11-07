@@ -23,6 +23,9 @@ function main() {
 
 	
 	function buildSplash() {
+		destroyLostGameScreen();
+		destroyWonGameScreen();
+
 		splashScreen = buildDOM(`
 			<main>
 				<h1>Aha!</h1>
@@ -49,6 +52,9 @@ function main() {
 	};
 
 	function buildGameScreen() {
+		destroyLostGameScreen();
+		destroyWonGameScreen();
+
 		gameScreen = buildDOM(`
 		<main>
 			<p>Idea: </p><p class="score">0</p>
@@ -116,30 +122,33 @@ function main() {
 				</p>
 				<h2>and came up with a Piece of Crap.</h2>
 				<!-- <p>Score: </p><p class="score">0</p> -->
-				<button>rethink!</button>
-				<button class="go-to-splash">back to start</button>
+				<button class="rethink">rethink!</button>
+				<button class="back">back to start</button>
 			</main>
 		`);
 
 		document.body.prepend(lostGameScreen);
 
-		// --------------------------------------------------------//
 		timerElementMinute = document.querySelector('span.minutes');
 		timerElementSecond = document.querySelector('span.seconds');
 		timerElementMinute.innerText = minutes;
 		timerElementSecond.innerText = seconds;
 		//scoreElement = document.querySelector('p.score');
 		//scoreElement.innerText = score;
-		// --------------------------------------------------------//
 
-		rethinkButton = document.querySelector('button');
-		rethinkButton.addEventListener('click', destroyLostGameScreen);
+		rethinkButton = document.querySelector('.rethink');
+		rethinkButton.addEventListener('click', buildGameScreen);
+
+		backToSplashButton = document.querySelector('.back');
+		backToSplashButton.addEventListener('click', buildSplash);
 	};
 
 	function destroyLostGameScreen() {
-		lostGameScreen.remove();
-		rethinkButton.removeEventListener('click', destroyLostGameScreen);
-		buildGameScreen();
+		if (lostGameScreen) {
+			lostGameScreen.remove();
+			rethinkButton.removeEventListener('click', buildGameScreen); ///
+			backToSplashButton.removeEventListener('click', buildSplash); ///
+		};
 	};
 
 	function buildWonGameScreen(score, minutes, seconds) {
@@ -156,30 +165,33 @@ function main() {
 				</p>
 				<h2>and came up with a Masterpiece, you smart butt!</h2>
 				<h3>Who you gonna sell it to?</h3>
-				<button>brainstorm a new one!</button>
-				<button class="go-to-splash">back to start</button>
+				<button class="rethink">brainstorm a new one!</button>
+				<button class="back">back to start</button>
 			</main>
 		`);
 
 		document.body.prepend(wonGameScreen);
 
-		// --------------------------------------------------------//
 		timerElementMinute = document.querySelector('span.minutes');
 		timerElementSecond = document.querySelector('span.seconds');
 		timerElementMinute.innerText = minutes;
 		timerElementSecond.innerText = seconds;
 		//scoreElement = document.querySelector('p.score');
 		//scoreElement.innerText = score;
-		// --------------------------------------------------------//
 
-		rethinkButton = document.querySelector('button');
-		rethinkButton.addEventListener('click', destroyWonGameScreen);
+		rethinkButton = document.querySelector('.rethink');
+		rethinkButton.addEventListener('click', buildGameScreen);
+
+		backToSplashButton = document.querySelector('.back');
+		backToSplashButton.addEventListener('click', buildSplash);
 	};
 
 	function destroyWonGameScreen() {
-		wonGameScreen.remove();
-		rethinkButton.removeEventListener('click', destroyWonGameScreen);
-		buildGameScreen();
+		if (wonGameScreen) {
+			wonGameScreen.remove();
+			rethinkButton.removeEventListener('click', buildGameScreen); ///
+			backToSplashButton.removeEventListener('click', buildSplash); ///
+		};
 	};
 
 	buildSplash();
