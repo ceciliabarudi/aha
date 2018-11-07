@@ -93,74 +93,73 @@ Game.prototype.checkDifficulty = function() {
 
 	switch (this.difficulty) {
 		case 0: //only for tests
-			this.shittyIdeaRate = 0.98;
-			this.goodIdeaRate = 0.90;
+			this.shittyIdeaRate = 0.9;
+			this.goodIdeaRate = 0.8;
 			this.ideas.forEach(function(idea) {
-				idea.setSpeed(1.5, 0.7);
+				idea.setSpeed(1.5, 1.3);
 			});
 			break;
 		case 1:
-			this.shittyIdeaRate = 0.975;
-			this.goodIdeaRate = 0.98;
+			this.shittyIdeaRate = 0.955;
+			this.goodIdeaRate = 0.96;
 			break;
 		case 2:
-			this.shittyIdeaRate = 0.97;
-			this.goodIdeaRate = 0.985;
+			this.shittyIdeaRate = 0.952;
+			this.goodIdeaRate = 0.957;
 			this.ideas.forEach(function(idea) {
-				idea.setSpeed(4, 2);
+				idea.setSpeed(3, 2.8);
 			});
 			break;
 		case 3:
-			this.shittyIdeaRate = 0.965;
-			this.goodIdeaRate = 0.987; 
+			this.shittyIdeaRate = 0.95;
+			this.goodIdeaRate = 0.953; 
 			this.ideas.forEach(function(idea) {
-				idea.setSpeed(5, 3);
+				idea.setSpeed(4, 3.8);
 			});
 			break;
 		case 4:
-			this.shittyIdeaRate = 0.96;
-			this.goodIdeaRate = 0.99;
+			this.shittyIdeaRate = 0.93;
+			this.goodIdeaRate = 0.951;
 			this.ideas.forEach(function(idea) {
-				idea.setSpeed(6, 4.5);
+				idea.setSpeed(5, 4.8);
 			});
 			break;
 		case 5:
-			this.shittyIdeaRate = 0.95;
-			this.goodIdeaRate = 0.992;
+			this.shittyIdeaRate = 0.92;
+			this.goodIdeaRate = 0.949;
 			this.ideas.forEach(function(idea) {
-				idea.setSpeed(7, 6);
+				idea.setSpeed(6, 5.7);
 			});
 			break;
 		case 6:
-			this.shittyIdeaRate = 0.95;
-			this.goodIdeaRate = 0.992;
+			this.shittyIdeaRate = 0.91;
+			this.goodIdeaRate = 0.945;
 			this.ideas.forEach(function(idea) {
-				idea.setSpeed(9, 7.5);
+				idea.setSpeed(7, 6.7);
 			});
 			break;
 		case 7:
-			this.shittyIdeaRate = 0.95;
-			this.goodIdeaRate = 0.992;
+			this.shittyIdeaRate = 0.91;
+			this.goodIdeaRate = 0.945;
 			this.ideas.forEach(function(idea) {
-				idea.setSpeed(11, 10);
+				idea.setSpeed(9.5, 9.2);
 			});
 			break;
 		case 8:
-			this.shittyIdeaRate = 0.95;
-			this.goodIdeaRate = 0.992;
+			this.shittyIdeaRate = 0.91;
+			this.goodIdeaRate = 0.945;
 			this.ideas.forEach(function(idea) {
-				idea.setSpeed(13, 12);
+				idea.setSpeed(10.2, 9.8);
 			});
 			break;
 		default:
-			this.shittyIdeaRate = 0.92;
-			this.goodIdeaRate = 0.997;
+			this.shittyIdeaRate = 0.9;
+			this.goodIdeaRate = 0.94;
 			this.ideas.forEach(function(idea) {
-				idea.setSpeed(15, 13);
+				idea.setSpeed(13, 12.5);
 			});
 			break;
-	}
-
+	};
 };
 
 

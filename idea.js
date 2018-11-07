@@ -4,10 +4,10 @@ function Idea(canvasElement) {
 	this.canvasElement = canvasElement;
 	this.ctx = this.canvasElement.getContext('2d');
 	this.size = 13;
-	this.x = Math.floor(Math.random() * this.canvasElement.width);
-	this.y = -20;
-	this.fastestSpeed = 3;
-	this.slowestSpeed = 1;
+	this.x = Math.floor(Math.random() * (this.canvasElement.width*2));
+	this.y = -100;
+	this.fastestSpeed = 2.3;
+	this.slowestSpeed = 2.15;
 }
 
 function Shitty(canvasElement, ctx, size, x, y) {
@@ -41,6 +41,10 @@ Idea.prototype.setSpeed = function(fastest, slowest) {
 
 Idea.prototype.update = function() {
 	this.y += Math.floor(Math.random() * this.fastestSpeed) + this.slowestSpeed;
+	this.x -= Math.floor(Math.random() * this.fastestSpeed) + this.slowestSpeed;
+
+	//this.y += this.fastestSpeed;
+	//this.x -= this.fastestSpeed;
 };
 
 Idea.prototype.isInCanvas = function() {
