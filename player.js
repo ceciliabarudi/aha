@@ -1,6 +1,6 @@
 'use strict';
 
-function Player(canvasElement) {
+function Player(canvasElement, spriteSrc) {
 	this.canvasElement = canvasElement;
 	this.ctx = this.canvasElement.getContext('2d');
 	this.size = 20;
@@ -10,14 +10,44 @@ function Player(canvasElement) {
 	this.directionX = 0;
 	this.speed = 5;
 	this.score = 0;
+	this.spriteSheet = new Image();
+	this.spriteSheet.src = spriteSrc;
+	this.frameCount = 8;
+	this.frameIndex = 0;
+	this.frameSpeed = 16;
+	this.speedCounter = 0;
 };
 
+Player.prototype.frameIndexCounter = function() {
+	this.speedCounter++;
+	if (this.frameSpeed === this.speedCounter ) {
+		if (this.frameIndex < this.frameCount-1) {
+			this.speedCounter = 0;
+			this.frameIndex ++;
+		} else {
+			this.speedCounter = 0;
+			this.frameIndex = 0;
+		}
+	}
+}
+
 Player.prototype.draw = function() {
-	this.ctx.fillStyle = 'blue';
 	this.ctx.beginPath();
 	this.ctx.arc(this.x, this.y, this.size, 0, 2 * Math.PI);
-	this.ctx.fill();
 	this.ctx.closePath();
+
+	this.frameIndexCounter();
+	this.ctx.drawImage(
+    this.spriteSheet,
+    this.frameIndex * 100,
+    0,
+    100,
+		100,
+		this.x - this.size,
+		this.y - this.size,
+		this.size * 2,
+		this.size * 2,
+	);
 };
 
 Player.prototype.update = function() {

@@ -20,7 +20,7 @@ Game.prototype.start = function() {
 };
 
 Game.prototype.startLoop = function() {
-	this.player = new Player(this.canvasElement);
+	this.player = new Player(this.canvasElement, './visuals/player.png');
 
 	this.handleMouseMove = function(event) {
 		var relativeX = event.clientX - this.canvasElement.offsetLeft;
@@ -80,11 +80,11 @@ Game.prototype.startLoop = function() {
 
 	var loop = function() {
 		if (Math.random() > this.shittyIdeaRate) {
-			this.ideas.push(new Shitty(this.canvasElement));
+			this.ideas.push(new Shitty(this.canvasElement, './visuals/shittyidea.png'));
 		};
 
 		if (Math.random() > this.goodIdeaRate) {
-			this.ideas.push(new Good(this.canvasElement));
+			this.ideas.push(new Good(this.canvasElement, './visuals/goodidea.png'));
 		};
 
 		this.updateAll();
