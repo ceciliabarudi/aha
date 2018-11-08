@@ -27,15 +27,29 @@ function main() {
 		destroyWonGameScreen();
 
 		splashScreen = buildDOM(`
-			<main>
-				<h1>Aha!</h1>
-				<h2>A Brainstorming Game</h2>
-				<div class="wrapper">
-					<h3>Instructions:</h3>
-					<p>Use the mouse to move and catch ideas</p>
-					<p>Avoid the shitty ones!</p>
+			<main class="relative">
+				<div class="title">
+					<h1>Aha!</h1>
+					<h2>A Brainstorming Game</h2>
 				</div>
-				<button>brainstorm!</button>
+				<div class="content">
+					<h3>Instructions</h3>
+					<p class="instructions inline">You're this guy:</p>
+					<img src="./visuals/guy.png" class="instructions guy inline"/>
+					<br>
+					<p class="instructions inline">You need to come up with </p>
+					<h5 class="rainbow inline"> THE GREATEST IDEA EVER </h5>
+					<p class="instructions inline"> for your next project, so it's time to brainstorm!</p>
+					<br>
+					<p class="instructions inline">Use the mouse to move and catch a bunch of good ideas</p>
+					<img src="./visuals/lightbulb.png" class="instructions lightbulb inline"/>
+					
+					<p class="instructions inline">But avoid the shitty ones, or you'll end up with a piece of crap!</p>
+					<img src="./visuals/squiggle.png" class="instructions squiggle inline"/>
+				</div>
+				<div class="takeaction">
+					<button class="brainstorm">brainstorm!</button>
+				</div>
 			</main>
 		`);
 
@@ -56,9 +70,9 @@ function main() {
 		destroyWonGameScreen();
 
 		gameScreen = buildDOM(`
-		<main>
-			<p>Idea: </p><p class="score">0</p>
-			<p class="timer">
+		<main class="relative">
+			<p class="inline">Idea: </p><p class="score inline">0</p>
+			<p class="timer inline">
 				Time spent brainstorming:
 				<span class="minutes">00</span>
 				<span>:</span>
@@ -113,7 +127,7 @@ function main() {
 		lostGameScreen = buildDOM(`
 			<main>
 				<h1>Done!</h1>
-				<p class="timer">
+				<p class="timer inline endtime">
 					You brainstormed for
 					<span class="minutes">00</span>
 					<span>minutes and</span>
@@ -121,7 +135,6 @@ function main() {
 					seconds,
 				</p>
 				<h2>and came up with a Piece of Crap.</h2>
-				<!-- <p>Score: </p><p class="score">0</p> -->
 				<button class="rethink">rethink!</button>
 				<button class="back">back to start</button>
 			</main>
@@ -156,7 +169,7 @@ function main() {
 			<main>
 				<h1>Done!</h1>
 				<!-- <p>Score: </p><p class="score">0</p> -->
-				<p class="timer">
+				<p class="timer inline endtime">
 					You brainstormed for
 					<span class="minutes">00</span>
 					<span>minutes and</span>
