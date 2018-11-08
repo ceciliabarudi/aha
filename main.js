@@ -64,7 +64,7 @@ function main() {
 				<span>:</span>
 				<span class="seconds">00</span>
 			</p>
-			<canvas width="1000px" height="650px"></canvas>
+			<canvas></canvas>
 		</main>
 		`);
 

@@ -3,6 +3,12 @@
 function Game(canvasElement) {
 	this.canvasElement = canvasElement;
 	this.ctx = this.canvasElement.getContext('2d');
+	this.canvasElement.width = 1000;
+	this.canvasElement.height = 650;
+	this.background = new Image();
+	this.background.src = './visuals/gamebg.png';
+	this.background.width = 0;
+	this.backgroundScrollSpeed = 10;
 	this.gameIsOver = false;
 	this.timeSpentBrainstorming = 0;
 	this.minutes;
@@ -190,6 +196,13 @@ Game.prototype.updateBrainstormingTime = function() {
 };
 
 Game.prototype.drawAll = function() {
+	this.ctx.drawImage(this.background, this.background.width, 0);
+	this.ctx.drawImage(this.background, this.background.width - this.canvasElement.width, 0);
+	this.background.width += this.backgroundScrollSpeed;
+	if (this.background.width === this.canvasElement.width) {
+		this.background.width = 0;
+	}
+
 	this.player.draw();
 	this.ideas.forEach(function(idea) {
     idea.draw();
