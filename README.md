@@ -12,7 +12,7 @@ As the player spends more and more time brainstorming, the more shitty ideas rai
 
 ## MVP (CANVAS)
 
-The MVP is a barebones version with Game, Player and Idea constructors. Dot graphics. Player should be able to start a new game, move, accumulate ideas, trigger end of game and restart. Only one difficulty.
+A barebones version with Game, Player and Idea constructors. Dot graphics. Player should be able to start a new game, move, accumulate ideas, trigger end of game and restart. Only one difficulty.
 
 ## Backlog
 
@@ -214,10 +214,6 @@ destroyWonGameScreen();
 - Player - returnScoreOnCollision
 - Game - checkScore callback
 - Main - updateScore
-
-## Important tasks that never get done
-- Update Slide presentation
-
 
 ## Links
 

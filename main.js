@@ -21,7 +21,6 @@ function main() {
 	var canvasElement;
 	var game;
 
-	
 	function buildSplash() {
 		destroyLostGameScreen();
 		destroyWonGameScreen();
@@ -43,7 +42,6 @@ function main() {
 					<br>
 					<p class="instructions inline">Use the mouse to move and catch a bunch of good ideas</p>
 					<img src="./visuals/lightbulb.svg" class="instructions lightbulb inline"/>
-					
 					<p class="instructions inline">But avoid the shitty ones, or you'll end up with a piece of crap!</p>
 					<img src="./visuals/squiggle.svg" class="instructions squiggle inline"/>
 				</div>
@@ -72,9 +70,9 @@ function main() {
 		gameScreen = buildDOM(`
 		<main class="relative">
 			<div class="status">
-				<p class="inline">Idea: </p><p class="score inline">0</p>
-				<p class="inline">&nbsp &nbsp &nbsp &nbsp</p>
-				<p class="timer inline">
+				<p class="inline gamescreen">Idea: </p><p class="score inline gamescreen">0</p>
+				<p class="inline gamescreen">&nbsp &nbsp &nbsp &nbsp</p>
+				<p class="timer inline gamescreen">
 					Time spent brainstorming:
 					<span class="minutes">00</span>
 					<span>:</span>
@@ -128,9 +126,9 @@ function main() {
 		};
 	};
 
-	function buildLostGameScreen(score, minutes, seconds) {
+	function buildLostGameScreen(minutes, seconds) {
 		lostGameScreen = buildDOM(`
-			<main>
+			<main class="relative">
 				<h1>Done!</h1>
 				<p class="timer inline endtime">
 					You brainstormed for
@@ -168,11 +166,10 @@ function main() {
 		};
 	};
 
-	function buildWonGameScreen(score, minutes, seconds) {
+	function buildWonGameScreen(minutes, seconds) {
 		wonGameScreen = buildDOM(`
-			<main>
+			<main class="relative">
 				<h1>Done!</h1>
-				<!-- <p>Score: </p><p class="score">0</p> -->
 				<p class="timer inline endtime">
 					You brainstormed for
 					<span class="minutes">00</span>
