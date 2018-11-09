@@ -15,6 +15,8 @@ As the player spends more and more time brainstorming, the more shitty ideas rai
 The MVP is a barebones version with Game, Player and Idea constructors. Dot graphics. Player should be able to start a new game, move, accumulate ideas, trigger end of game and restart. Only one difficulty.
 
 ## Backlog
+
+### Done!
 - Clean and comment code
 - Add different Win and Lose screens
 - Time Spent Brainstorming makes more shitty ideas appear
@@ -22,6 +24,8 @@ The MVP is a barebones version with Game, Player and Idea constructors. Dot grap
 - Ideas coming from top right corner instead of above
 - Movement through mouse instead of arrow keys
 - Images and Sprites
+
+### To do!
 - Design
 - Music
 - Add username and highscores
