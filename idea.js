@@ -15,6 +15,7 @@ function Idea(canvasElement) {
 	this.speedCounter = 0;
 }
 
+// Good work on using inheritance but it is not implemented 100% correctly
 function Shitty(canvasElement, spriteSrc, ctx, size, x, y) {
 	Idea.call(this, canvasElement, ctx, size, x, y);
 	this.points = -30;

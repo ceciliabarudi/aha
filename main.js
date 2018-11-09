@@ -128,6 +128,8 @@ function main() {
 		};
 	};
 
+	// There's some repeated code between the buildLostGameScreen y buildWonGameScreen
+
 	function buildLostGameScreen(score, minutes, seconds) {
 		lostGameScreen = buildDOM(`
 			<main>
