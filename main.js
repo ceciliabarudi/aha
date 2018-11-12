@@ -1,31 +1,30 @@
 'use strict';
 
-function buildDOM(html) {
-	var div = document.createElement('div');
-	div.innerHTML = html;
-	return div.children[0];
+function buildDOM (html) {
+  var div = document.createElement('div');
+  div.innerHTML = html;
+  return div.children[0];
 };
 
-function main() {
+function main () {
+  var splashScreen;
+  var gameScreen;
+  var lostGameScreen;
+  var wonGameScreen;
+  var brainstormButton;
+  var rethinkButton;
+  var backToSplashButton;
+  var scoreElement;
+  var timerElementMinute;
+  var timerElementSecond;
+  var canvasElement;
+  var game;
 
-	var splashScreen;
-	var gameScreen;
-	var lostGameScreen;
-	var wonGameScreen;
-	var brainstormButton;
-	var rethinkButton;
-	var backToSplashButton;
-	var scoreElement;
-	var timerElementMinute;
-	var timerElementSecond;
-	var canvasElement;
-	var game;
+  function buildSplash () {
+    destroyLostGameScreen();
+    destroyWonGameScreen();
 
-	function buildSplash() {
-		destroyLostGameScreen();
-		destroyWonGameScreen();
-
-		splashScreen = buildDOM(`
+    splashScreen = buildDOM(`
 			<main class="relative">
 				<div class="title">
 					<h1>Aha!</h1>
@@ -51,23 +50,23 @@ function main() {
 			</main>
 		`);
 
-		document.body.prepend(splashScreen);
+    document.body.prepend(splashScreen);
 
-		brainstormButton = document.querySelector('button');
-		brainstormButton.addEventListener('click', destroySplash);
-	};
+    brainstormButton = document.querySelector('button');
+    brainstormButton.addEventListener('click', destroySplash);
+  };
 
-	function destroySplash() {
-		splashScreen.remove();
-		brainstormButton.removeEventListener('click', destroySplash);
-		buildGameScreen();
-	};
+  function destroySplash () {
+    splashScreen.remove();
+    brainstormButton.removeEventListener('click', destroySplash);
+    buildGameScreen();
+  };
 
-	function buildGameScreen() {
-		destroyLostGameScreen();
-		destroyWonGameScreen();
+  function buildGameScreen () {
+    destroyLostGameScreen();
+    destroyWonGameScreen();
 
-		gameScreen = buildDOM(`
+    gameScreen = buildDOM(`
 		<main class="relative">
 			<div class="status">
 				<p class="inline gamescreen">Idea: </p><p class="score inline gamescreen">0</p>
@@ -85,49 +84,49 @@ function main() {
 		</main>
 		`);
 
-		document.body.prepend(gameScreen);
-		
-		canvasElement = document.querySelector('canvas');
-		scoreElement = document.querySelector('p.score');
-		timerElementMinute = document.querySelector('span.minutes');
-		timerElementSecond = document.querySelector('span.seconds');
-		
-		game = new Game(canvasElement);
-		game.start();
-		game.gameIsOverCallback(function() {
-			gameOverTransition(game.player.score, game.minutes, game.seconds)
-		});
-		game.checkScore(updateScore);
-		game.updateTimerCallback(updateTimer);
-	};
+    document.body.prepend(gameScreen);
 
-	function gameOverTransition(score, minutes, seconds, intervalIdDifficulty) {
-		destroyGameScreen();
-		clearInterval(intervalIdDifficulty);
-		if (game.player.score < 0 ) {
-			buildLostGameScreen(score, minutes, seconds);
-		} else {
-			buildWonGameScreen(score, minutes, seconds);
-		};
-	}
+    canvasElement = document.querySelector('canvas');
+    scoreElement = document.querySelector('p.score');
+    timerElementMinute = document.querySelector('span.minutes');
+    timerElementSecond = document.querySelector('span.seconds');
 
-	function updateScore(score) {
-		scoreElement.innerText = score;
-	}
+    game = new Game(canvasElement);
+    game.start();
+    game.gameIsOverCallback(function () {
+      gameOverTransition(game.player.score, game.minutes, game.seconds);
+    });
+    game.checkScore(updateScore);
+    game.updateTimerCallback(updateTimer);
+  };
 
-	function updateTimer(minutes, seconds) {
-		timerElementMinute.innerText = minutes;
-		timerElementSecond.innerText = seconds;
-	}
+  function gameOverTransition (score, minutes, seconds, intervalIdDifficulty) {
+    destroyGameScreen();
+    clearInterval(intervalIdDifficulty);
+    if (game.player.score < 0) {
+      buildLostGameScreen(score, minutes, seconds);
+    } else {
+      buildWonGameScreen(score, minutes, seconds);
+    };
+  }
 
-	function destroyGameScreen() {
-		if (gameScreen) {
-			gameScreen.remove();
-		};
-	};
+  function updateScore (score) {
+    scoreElement.innerText = score;
+  }
 
-	function buildLostGameScreen(minutes, seconds) {
-		lostGameScreen = buildDOM(`
+  function updateTimer (minutes, seconds) {
+    timerElementMinute.innerText = minutes;
+    timerElementSecond.innerText = seconds;
+  }
+
+  function destroyGameScreen () {
+    if (gameScreen) {
+      gameScreen.remove();
+    };
+  };
+
+  function buildLostGameScreen (minutes, seconds) {
+    lostGameScreen = buildDOM(`
 			<main class="relative">
 				<h1>Done!</h1>
 				<p class="timer inline endtime">
@@ -144,30 +143,30 @@ function main() {
 			</main>
 		`);
 
-		document.body.prepend(lostGameScreen);
+    document.body.prepend(lostGameScreen);
 
-		timerElementMinute = document.querySelector('span.minutes');
-		timerElementSecond = document.querySelector('span.seconds');
-		timerElementMinute.innerText = minutes;
-		timerElementSecond.innerText = seconds;
+    timerElementMinute = document.querySelector('span.minutes');
+    timerElementSecond = document.querySelector('span.seconds');
+    timerElementMinute.innerText = minutes;
+    timerElementSecond.innerText = seconds;
 
-		rethinkButton = document.querySelector('.rethink');
-		rethinkButton.addEventListener('click', buildGameScreen);
+    rethinkButton = document.querySelector('.rethink');
+    rethinkButton.addEventListener('click', buildGameScreen);
 
-		backToSplashButton = document.querySelector('.back');
-		backToSplashButton.addEventListener('click', buildSplash);
-	};
+    backToSplashButton = document.querySelector('.back');
+    backToSplashButton.addEventListener('click', buildSplash);
+  };
 
-	function destroyLostGameScreen() {
-		if (lostGameScreen) {
-			lostGameScreen.remove();
-			rethinkButton.removeEventListener('click', buildGameScreen);
-			backToSplashButton.removeEventListener('click', buildSplash);
-		};
-	};
+  function destroyLostGameScreen () {
+    if (lostGameScreen) {
+      lostGameScreen.remove();
+      rethinkButton.removeEventListener('click', buildGameScreen);
+      backToSplashButton.removeEventListener('click', buildSplash);
+    };
+  };
 
-	function buildWonGameScreen(minutes, seconds) {
-		wonGameScreen = buildDOM(`
+  function buildWonGameScreen (minutes, seconds) {
+    wonGameScreen = buildDOM(`
 			<main class="relative">
 				<h1>Done!</h1>
 				<p class="timer inline endtime">
@@ -185,30 +184,29 @@ function main() {
 			</main>
 		`);
 
-		document.body.prepend(wonGameScreen);
+    document.body.prepend(wonGameScreen);
 
-		timerElementMinute = document.querySelector('span.minutes');
-		timerElementSecond = document.querySelector('span.seconds');
-		timerElementMinute.innerText = minutes;
-		timerElementSecond.innerText = seconds;
+    timerElementMinute = document.querySelector('span.minutes');
+    timerElementSecond = document.querySelector('span.seconds');
+    timerElementMinute.innerText = minutes;
+    timerElementSecond.innerText = seconds;
 
-		rethinkButton = document.querySelector('.rethink');
-		rethinkButton.addEventListener('click', buildGameScreen);
+    rethinkButton = document.querySelector('.rethink');
+    rethinkButton.addEventListener('click', buildGameScreen);
 
-		backToSplashButton = document.querySelector('.back');
-		backToSplashButton.addEventListener('click', buildSplash);
-	};
+    backToSplashButton = document.querySelector('.back');
+    backToSplashButton.addEventListener('click', buildSplash);
+  };
 
-	function destroyWonGameScreen() {
-		if (wonGameScreen) {
-			wonGameScreen.remove();
-			rethinkButton.removeEventListener('click', buildGameScreen);
-			backToSplashButton.removeEventListener('click', buildSplash);
-		};
-	};
+  function destroyWonGameScreen () {
+    if (wonGameScreen) {
+      wonGameScreen.remove();
+      rethinkButton.removeEventListener('click', buildGameScreen);
+      backToSplashButton.removeEventListener('click', buildSplash);
+    };
+  };
 
-	buildSplash();
-
+  buildSplash();
 };
 
 window.addEventListener('load', main);
